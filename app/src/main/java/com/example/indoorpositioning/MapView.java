@@ -87,17 +87,17 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
     private Bitmap getBitmap(Bitmap bitmap) {
 
-        int width = bitmap.getWidth();//获取宽度
+        int width = bitmap.getWidth();
 
-        int height = bitmap.getHeight();//获取高度
+        int height = bitmap.getHeight();
 
-        int min = Math.min(width, height);//比较最小值
+        int min = Math.min(width, height);
 
-        Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (width - min) / 2, (height - min) / 2, min, min);//先切成正方形，在显示半径
+        Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (width - min) / 2, (height - min) / 2, min, min);
 
-        Bitmap bitmap2 = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);//ARGB_8888色彩渲染鲜艳
+        Bitmap bitmap2 = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
 
-        Canvas canvas = new Canvas(bitmap2);//Canvas画布
+        Canvas canvas = new Canvas(bitmap2);
 
         Paint paint = new Paint();
 

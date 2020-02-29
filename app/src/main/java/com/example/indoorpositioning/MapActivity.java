@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +16,9 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
 
     MapView bottomView;
     Button position;
+    Button search;
+    TextView place;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,16 +27,25 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         bottomView.setOnTouchListener(bottomView);
         position = (Button) findViewById(R.id.button_position);
         position.setOnClickListener(this);
+        place = (TextView) findViewById(R.id.place_name);
+        search = (Button) findViewById(R.id.button_findplace);
+        search.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        new IntentIntegrator(this)
-                .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// Scan type
-                //.setPrompt("fit the qrcode")//
-                .setCameraId(0)// set camera
-                .setBeepEnabled(true)// add beep sound
-                .initiateScan();// initialize
+        switch (v.getId()) {
+            case R.id.button_position:
+            new IntentIntegrator(this)
+                    .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// Scan type
+                    //.setPrompt("fit the qrcode")//
+                    .setCameraId(0)// set camera
+                    .setBeepEnabled(true)// add beep sound
+                    .initiateScan();// initialize
+                break;
+            case R.id.button_findplace:
+                String placeInfo = place.getText().toString();
+        }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
