@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.indoorpositioning.placeInfo.Algorithm;
+import com.example.indoorpositioning.placeInfo.Place;
+import com.example.indoorpositioning.placeInfo.PlaceArray;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -45,6 +47,9 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.button_findplace:
                 String placeInfo = place.getText().toString();
+                PlaceArray match = new PlaceArray();
+                Place [] x = match.getPlaceArray();
+//              bottomView.setDrawable(getResources().getDrawable(R.drawable.f2));
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

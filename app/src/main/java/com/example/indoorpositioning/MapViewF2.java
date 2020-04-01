@@ -16,9 +16,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
-
-public class MapView extends View implements View.OnTouchListener, GestureDetector.OnGestureListener {
+public class MapViewF2 extends View implements View.OnTouchListener, GestureDetector.OnGestureListener {
 
     private Paint paint;
     private float scale = 1f;
@@ -27,8 +25,6 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
     int currentY;
     int width;
     int height;
-    Drawable drawable;
-//    ArrayList
     Point point = new Point();
 
     private float mFirstX, mFirstY, mSecondX, mSecondY;
@@ -36,13 +32,13 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
     private GestureDetector mGestureDetector;
 
-    public MapView(Context context) {
+    public MapViewF2(Context context) {
         super(context);
         paint = new Paint();
         mGestureDetector = new GestureDetector(this);
     }
 
-    public MapView(Context context, AttributeSet attrs) {
+    public MapViewF2(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
         mGestureDetector = new GestureDetector(this);
@@ -59,7 +55,7 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         currentX = width / 2;
         currentY = height / 2;
         point.set(width / 2, height / 2);
-        drawable = getContext().getResources().getDrawable(R.drawable.f1);
+
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -67,7 +63,7 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         super.onDraw(canvas);
 
         canvas.save();
-
+        Drawable drawable = getContext().getResources().getDrawable(R.drawable.f2);//获取图片
 
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();//Drawable图片类型转换成BitmapDrawable，返回是Bitmap
         canvas.scale(scale, scale);
@@ -75,7 +71,8 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
         canvas.drawBitmap(bitmap, 0, 250, new Paint());
         canvas.drawCircle(currentX, currentY, 10, paint);
-//        for()  forloop to draw the route...
+//        paint.setColor(Color.BLUE);
+//        canvas.drawCircle(200, 200, 100, paint);
 
         canvas.restore();
     }
@@ -88,10 +85,6 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         invalidate();
     }
 
-    protected void setDrawable(Drawable x){
-        drawable = x;
-        invalidate();
-    }
     private Bitmap getBitmap(Bitmap bitmap) {
 
         int width = bitmap.getWidth();
@@ -185,8 +178,8 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        this.dx = this.dx - (e1.getX() - e2.getX()) / 20;
-        this.dy = this.dy - (e1.getY() - e2.getY()) / 20;
+        this.dx = this.dx - (e1.getX() - e2.getX()) / 50;
+        this.dy = this.dy - (e1.getY() - e2.getY()) / 50;
         invalidate();
         return true;
     }
