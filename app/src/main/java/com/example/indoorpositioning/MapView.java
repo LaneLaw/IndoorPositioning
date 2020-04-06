@@ -28,6 +28,7 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
     int width;
     int height;
     Drawable drawable;
+    int x1,y1,x2,y2;
 //    ArrayList
     Point point = new Point();
 
@@ -76,7 +77,7 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         canvas.drawBitmap(bitmap, 0, 250, new Paint());
         canvas.drawCircle(currentX, currentY, 10, paint);
 //        for()  forloop to draw the route...
-
+        canvas.drawLine(x1,y1,x2,y2,paint);
         canvas.restore();
     }
     protected void setpoint(int x, int y) {
@@ -90,6 +91,13 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
     protected void setDrawable(Drawable x){
         drawable = x;
+        invalidate();
+    }
+    protected void setRoute(int x1, int y1,int x2, int y2){
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
         invalidate();
     }
     private Bitmap getBitmap(Bitmap bitmap) {

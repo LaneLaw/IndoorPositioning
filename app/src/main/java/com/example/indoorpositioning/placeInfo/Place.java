@@ -14,4 +14,19 @@ public class Place {
         this.name = name;
         this.dis = dis;
     }
+    public int getDis(int x){
+        return dis[x];
+    }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getId(){
+        return id;
+    }
 }

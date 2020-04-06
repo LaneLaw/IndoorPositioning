@@ -57,10 +57,6 @@ public class MyView extends View {
 //                , height / 2, width / 2, 0, width / 2, height,}, paint);
 //        paint.setStyle(Paint.Style.FILL);
         //circle(filled)
-        canvas.drawCircle(currentX, currentY, 50, paint);
-        //circle(not filled)
-        paint.setStyle(Paint.Style.STROKE);
-        canvas.drawCircle(width / 2, height / 2, width / 2, paint);
     }
 
     public void initdata(int x, int y) {

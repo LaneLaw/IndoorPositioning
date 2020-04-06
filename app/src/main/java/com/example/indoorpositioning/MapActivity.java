@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +15,16 @@ import com.example.indoorpositioning.placeInfo.PlaceArray;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
+
 public class MapActivity extends AppCompatActivity implements View.OnClickListener {
 
     MapView bottomView;
     Button position;
     Button search;
-    TextView place;
+    Button find;
+    EditText place;
+    EditText xy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,12 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         bottomView.setOnTouchListener(bottomView);
         position = (Button) findViewById(R.id.button_position);
         position.setOnClickListener(this);
-        place = (TextView) findViewById(R.id.place_name);
+        place = (EditText) findViewById(R.id.place_name);
         search = (Button) findViewById(R.id.button_findplace);
         search.setOnClickListener(this);
+        find = (Button) findViewById(R.id.button_findxy);
+        find.setOnClickListener(this);
+        xy = (EditText) findViewById(R.id.place_xy);
     }
 
     @Override
@@ -47,9 +55,27 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.button_findplace:
                 String placeInfo = place.getText().toString();
+                ArrayList <Integer> tempArray = new ArrayList<>();
                 PlaceArray match = new PlaceArray();
                 Place [] x = match.getPlaceArray();
+                int [][] W = new int[x.length][x.length];
+                for(int i =0; i< x.length; i++) {
+                    for (int j=0; j<x.length;j++){
+                        W[i][j] = x[i].getDis(j);
+                    }
+                }
+                tempArray = Algorithm.dijkstra(W, Integer.parseInt(placeInfo), 0);
+
+                bottomView.setRoute(x[tempArray.get(0)].getX(),x[tempArray.get(0)].getY(),x[tempArray.get(1)].getX(),x[tempArray.get(1)].getY());
+
 //              bottomView.setDrawable(getResources().getDrawable(R.drawable.f2));
+                break;
+            case R.id.button_findxy:
+                String placexy = xy.getText().toString();
+                String [] temp = placexy.split(" ");
+                int x1 = Integer.parseInt(temp[0].trim());
+                int y1 = Integer.parseInt(temp[1].trim());
+                bottomView.setpoint(x1, y1);
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
