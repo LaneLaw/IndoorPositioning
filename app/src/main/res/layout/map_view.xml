@@ -4,28 +4,28 @@
     android:layout_height="match_parent"
     >
 
+
     <Button
         android:id="@+id/button_position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
-        android:text="Positioning" />
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/position"/>
 
     <Button
         android:id="@+id/button_findplace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="269dp"
-        android:layout_marginLeft="269dp"
-        android:layout_marginTop="6dp"
-        android:text="Search" />
-
+        android:layout_marginStart="250dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="18dp"
+        android:text="search" />
 
     <Button
         android:id="@+id/button_findxy"
@@ -44,17 +44,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/place_name"
+
+
+    <AutoCompleteTextView
+        android:id="@+id/act_main_cat1"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginLeft="114dp"
-        android:layout_marginTop="11dp"
-        android:hint="Search places"/>
+        android:layout_marginStart="94dp"
+        android:layout_marginLeft="94dp"
+        android:layout_marginTop="22dp"
+        android:hint="Search places"
+        android:completionThreshold="1" />
+
 
     <EditText
         android:id="@+id/place_xy"

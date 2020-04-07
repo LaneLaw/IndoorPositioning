@@ -1,73 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-    <com.example.indoorpositioning.MyView
-        android:layout_centerInParent="true"
-        android:id="@+id/second_myView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="28dp"
-        android:text="TextView" />
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="28dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="28dp"
-        android:text="TextView" />
+    <ViewFlipper
+        android:id="@+id/ViewFlipper1"
+        android:layout_width="fill_parent"
+        android:layout_height="627dp"></ViewFlipper>
 
     <Button
         android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="427dp"
-        android:text="QRcode" />
-
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_start"
-        android:layout_marginStart="46dp"
-        android:layout_marginLeft="46dp"
-        android:layout_marginTop="-34dp"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:text="Result" />
-
-    <Button
-        android:id="@+id/button_toIndoor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_marginStart="250dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="-24dp"
-        android:layout_toEndOf="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
-        android:text="To Indoor" />
-
-</RelativeLayout>
+        android:layout_marginStart="269dp"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:background="@drawable/button"
+        android:text="Start" />
+</LinearLayout>

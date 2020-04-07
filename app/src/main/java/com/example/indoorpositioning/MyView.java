@@ -52,36 +52,8 @@ public class MyView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //lines
-//        canvas.drawLines(new float[]{0, height / 2, width
-//                , height / 2, width / 2, 0, width / 2, height,}, paint);
-//        paint.setStyle(Paint.Style.FILL);
-        //circle(filled)
-    }
 
-    public void initdata(int x, int y) {
-
-        if(((currentX-360) * (currentX-360)) + ((currentY-720) * (currentY-720) ) <= (360*360)) {
-            currentX = currentX - x;
-            currentY = currentY - y;
-        }else{
-            currentX = currentX + x;
-            currentY = currentY + y;
-        }
-
-        invalidate();
-    }
-
-    public void setpoint(int x, int y) {
-
-
-            currentX = x;
-            currentY = y;
-
-        invalidate();
-    }
-
-    public String getCurrentXY(){
-        return "X: " + currentX + ", Y: " + currentY;
     }
 }
+
+

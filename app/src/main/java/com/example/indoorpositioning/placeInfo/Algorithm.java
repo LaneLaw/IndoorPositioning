@@ -71,8 +71,21 @@ public class Algorithm {
         Place [] place = placeInfo.getPlaceArray();
         int [][] W = new int[place.length][place.length];
         for(int i =0; i< place.length; i++) {
+            System.out.println();
             for (int j=0; j<place.length;j++){
                 W[i][j] = place[i].getDis(j);
+                System.out.print(W[i][j] + ", ");
+            }
+        }
+        for(int n=0; n<7; n++){
+            int temp2 = W[6][n];
+            W[6][n] = W[6][n];
+            W[6][n] = temp2;
+        }
+        for(int i =0; i< place.length; i++) {
+            System.out.println();
+            for (int j=0; j<place.length;j++){
+                System.out.print(W[i][j] + ", ");
             }
         }
 
@@ -84,7 +97,7 @@ public class Algorithm {
 //                { inf,  5,    1,   3,   0,    6 },
 //                { inf, inf,  inf,   2,   6,    0 } };
 
-        dijkstra(W, 4, 0);
+        dijkstra(W, 5, 0);
         for (int i=0;i<pathRecord.size(); i ++){
             System.out.println(pathRecord.get(i));
         }
