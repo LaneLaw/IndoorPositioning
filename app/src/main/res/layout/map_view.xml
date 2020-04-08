@@ -22,10 +22,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="250dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="18dp"
-        android:text="search" />
+        android:layout_marginStart="253dp"
+        android:layout_marginLeft="253dp"
+        android:layout_marginTop="17dp"
+        android:background="#66CCFF"
+        android:text="search"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/button_findxy"
@@ -37,14 +39,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="484dp"
+        android:background="#66CCFF"
+        android:textColor="#FFFFFF"
         android:text="Find" />
+
 
     <com.example.indoorpositioning.MapView
         android:id="@+id/bottom_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-
 
     <AutoCompleteTextView
         android:id="@+id/act_main_cat1"
@@ -71,5 +74,16 @@
         android:layout_marginLeft="99dp"
         android:layout_marginTop="487dp"
         android:hint="Search xy" />
+
+    <TextView
+        android:layout_width="164dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="243dp"
+        android:layout_marginRight="243dp"
+        android:layout_marginBottom="72dp" />
+
 
 </RelativeLayout>

@@ -28,10 +28,7 @@ import android.widget.ViewFlipper;
         flipper = (ViewFlipper) this.findViewById(R.id.ViewFlipper1);
 
         flipper.addView(addImageView(R.drawable.home1));
-        flipper.addView(addImageView(R.drawable.f2));
-        flipper.addView(addImageView(R.drawable.ic_launcher_background));
-        flipper.addView(addImageView(R.drawable.ic_launcher_foreground));
-        flipper.addView(addImageView(R.drawable.timg));
+        flipper.addView(addImageView(R.drawable.home2));
         start = (Button) findViewById(R.id.button_start);
         start.setOnClickListener(this);
     }

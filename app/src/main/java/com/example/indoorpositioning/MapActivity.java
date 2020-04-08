@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.indoorpositioning.placeInfo.Algorithm;
@@ -77,6 +78,13 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                         System.out.println("end: " + end);
                     }
                 }
+                if (start == end){
+                    new AlertDialog.Builder(this)
+                            .setTitle("Here!")
+                            .setMessage("You are already at the destination.")
+                            .setPositiveButton("OK", null).show();
+                    break;
+                }
                 int [][] W = new int[x.length][x.length];
                 for(int i =0; i< x.length; i++) {
                     for (int j=0; j<x.length;j++){
@@ -90,6 +98,17 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                     int temp2 = W[x.length-1][n];
                     W[x.length-1][n] = W[end][n];
                     W[end][n] = temp2;
+
+//                    Place tempPlace1 = x[start];
+//                    x[start] = x[0];
+//                    x[0] = tempPlace1;
+//                    Place tempPlace2 = x[end];
+//                    x[end] = x[0];
+//                    x[0] = tempPlace2;
+                    x[0].setId(start);
+                    x[start].setId(0);
+                    x[end].setId(x.length-1);
+                    x[x.length-1].setId(end);
                 }
                 for(int n=0; n<x.length; n++){
                     int temp1 = W[n][0];
