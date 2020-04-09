@@ -2,7 +2,9 @@ package com.example.indoorpositioning;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -120,6 +122,12 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 }
                 tempArray = Algorithm.dijkstra(W, x.length, 0);
                 bottomView.setRoute(x[tempArray.get(0)].getX(),x[tempArray.get(0)].getY(),x[tempArray.get(1)].getX(),x[tempArray.get(1)].getY());
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle("Route").setMessage("Distance: ").create();
+                Window window = dialog.getWindow();
+                window.setGravity(Gravity.BOTTOM);
+                window.setWindowAnimations(R.style.mystyle);
+                dialog.show();
 //              bottomView.setDrawable(getResources().getDrawable(R.drawable.f2));
                 break;
             case R.id.button_findxy:
