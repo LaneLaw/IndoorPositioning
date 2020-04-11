@@ -1,10 +1,13 @@
 package com.example.indoorpositioning;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -39,12 +42,22 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+        }
         setContentView(R.layout.map_view);
         act = (AutoCompleteTextView)findViewById(R.id.act_main_cat1);
         data1 = new String[]{"Victoria", "sammy", "DIESEL","Elevator"};
         adapter1 = new ArrayAdapter<String>( this,R.layout.act,data1);
         act.setAdapter(adapter1);
-
         bottomView = (MapView) findViewById(R.id.bottom_view);
         bottomView.setOnTouchListener(bottomView);
         position = (Button) findViewById(R.id.button_position);
@@ -111,6 +124,13 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                     x[start].setId(0);
                     x[end].setId(x.length-1);
                     x[x.length-1].setId(end);
+
+                    Place change1 = x[0];
+                    x[0] = x[start];
+                    x[start] = change1;
+                    Place change2= x[x.length-1];
+                    x[x.length-1] = x[end];
+                    x[end] = change2;
                 }
                 for(int n=0; n<x.length; n++){
                     int temp1 = W[n][0];
@@ -121,7 +141,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                     W[n][end] = temp2;
                 }
                 tempArray = Algorithm.dijkstra(W, x.length, 0);
-                bottomView.setRoute(x[tempArray.get(0)].getX(),x[tempArray.get(0)].getY(),x[tempArray.get(1)].getX(),x[tempArray.get(1)].getY());
+                bottomView.drawPath(tempArray,x);
                 AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle("Route").setMessage("Distance: ").create();
                 Window window = dialog.getWindow();

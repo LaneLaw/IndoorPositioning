@@ -16,6 +16,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.indoorpositioning.placeInfo.Place;
+
 import java.util.ArrayList;
 
 public class MapView extends View implements View.OnTouchListener, GestureDetector.OnGestureListener {
@@ -29,7 +31,8 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
     int height;
     Drawable drawable;
     int x1,y1,x2,y2;
-//    ArrayList
+    ArrayList <Integer> pathInfo = null;
+    Place [] p = null;
     Point point = new Point();
 
     private float mFirstX, mFirstY, mSecondX, mSecondY;
@@ -76,8 +79,11 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
         canvas.drawBitmap(bitmap, 0, 250, new Paint());
         canvas.drawCircle(currentX, currentY, 10, paint);
-//        for()  forloop to draw the route...
-        canvas.drawLine(x1,y1,x2,y2,paint);
+        if(p == null || pathInfo == null){}else {
+            for (int i = 0; i < pathInfo.size() - 1; i++) {
+                canvas.drawLine(p[pathInfo.get(i)].getX(), p[pathInfo.get(i)].getY(), p[pathInfo.get(i + 1)].getX(), p[pathInfo.get(i + 1)].getY(), paint);
+            }
+        }
         canvas.restore();
     }
     protected void setpoint(int x, int y) {
@@ -91,6 +97,12 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
 
     protected void setDrawable(Drawable x){
         drawable = x;
+        invalidate();
+    }
+
+    protected void drawPath(ArrayList<Integer> x, Place [] y){
+        this.pathInfo = x;
+        this.p = y;
         invalidate();
     }
     protected void setRoute(int x1, int y1,int x2, int y2){
