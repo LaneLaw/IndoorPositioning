@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class Algorithm {
     private static final int inf=Integer.MAX_VALUE;//no edge between two points
     static ArrayList <Integer> pathRecord = new ArrayList<>();
+    public static int distance;
     public Algorithm(){
 
     }
@@ -48,6 +49,7 @@ public class Algorithm {
         for(int i=1;i<n;i++){
             Arrays.fill(shortest, 0);
             System.out.print(dist[i]+":");
+            distance = dist[i];
             int k=0;
             shortest[k]=i;
             while(path[shortest[k]]!=0){
@@ -89,13 +91,6 @@ public class Algorithm {
             }
         }
 
-//        int[][] W = {
-//                {  0,   1,   4,  inf,  inf,  inf },
-//                {  1,   0,   2,   7,    5,  inf },
-//                {  4,   2,   0,  inf,    1,  inf },
-//                { inf,  7,  inf,   0,    3,    2 },
-//                { inf,  5,    1,   3,   0,    6 },
-//                { inf, inf,  inf,   2,   6,    0 } };
 
         dijkstra(W, 5, 0);
         for (int i=0;i<pathRecord.size(); i ++){

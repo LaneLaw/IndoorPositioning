@@ -31,13 +31,22 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
     Button position;
     Button search;
     Button find;
-    EditText place;
+    Button f1;
+    Button f2;
     EditText xy;
     String [] data1;
     ArrayAdapter <String> adapter1;
     AutoCompleteTextView act;
+    int tempStart = -1;
     int start;
     int end;
+    int distance = 0;
+    ArrayList <Integer> tempArray1 = new ArrayList<>();
+    ArrayList <Integer> tempArray2 = new ArrayList<>();
+    PlaceArray match = new PlaceArray();
+    Place [] x = match.getPlaceArray();
+    int floor = 1;
+    int floor1 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +64,21 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         }
         setContentView(R.layout.map_view);
         act = (AutoCompleteTextView)findViewById(R.id.act_main_cat1);
-        data1 = new String[]{"Victoria", "sammy", "DIESEL","Elevator"};
+        data1 = new String[]{"Victoria", "sammy", "DIESEL","Elevator L1","Elevator L2","Cross Road4"};
         adapter1 = new ArrayAdapter<String>( this,R.layout.act,data1);
         act.setAdapter(adapter1);
         bottomView = (MapView) findViewById(R.id.bottom_view);
         bottomView.setOnTouchListener(bottomView);
         position = (Button) findViewById(R.id.button_position);
         position.setOnClickListener(this);
-//        place = (EditText) findViewById(R.id.place_name);
         search = (Button) findViewById(R.id.button_findplace);
         search.setOnClickListener(this);
         find = (Button) findViewById(R.id.button_findxy);
         find.setOnClickListener(this);
+        f1 = (Button) findViewById(R.id.button_f1);
+        f1.setOnClickListener(this);
+        f2 = (Button) findViewById(R.id.button_f2);
+        f2.setOnClickListener(this);
         xy = (EditText) findViewById(R.id.place_xy);
     }
 
@@ -85,8 +97,16 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 String placeInfo = act.getText().toString();
                 String dest = placeInfo;
                 ArrayList <Integer> tempArray = new ArrayList<>();
-                PlaceArray match = new PlaceArray();
-                Place [] x = match.getPlaceArray();
+                tempArray.clear();
+                tempArray1.clear();
+                tempArray2.clear();
+                if(tempStart == start){
+                    start = 0;
+                    tempStart = 0;
+                }else{
+                    tempStart = start;
+                }
+
                 for(int m=0; m<x.length; m++){
                     if(dest.equals(x[m].getName())){
                         end = m;
@@ -141,14 +161,26 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                     W[n][end] = temp2;
                 }
                 tempArray = Algorithm.dijkstra(W, x.length, 0);
-                bottomView.drawPath(tempArray,x);
+                distance = Algorithm.distance;
+                for(int i=0; i<tempArray.size();i++){
+                    if(x[tempArray.get(i)].getFloor() == 1){
+                        tempArray1.add(tempArray.get(i));
+                    }else{
+                        tempArray2.add(tempArray.get(i));
+                    }
+                }
+                if (floor1 == 1) {
+                    bottomView.drawPathL1(tempArray1, x);
+                }else if(floor1 == 2){
+                    bottomView.drawPathL2(tempArray2, x);
+                }
                 AlertDialog dialog = new AlertDialog.Builder(this)
-                        .setTitle("Route").setMessage("Distance: ").create();
+                        .setTitle("Route").setMessage("Distance: " + distance).create();
                 Window window = dialog.getWindow();
                 window.setGravity(Gravity.BOTTOM);
                 window.setWindowAnimations(R.style.mystyle);
                 dialog.show();
-//              bottomView.setDrawable(getResources().getDrawable(R.drawable.f2));
+
                 break;
             case R.id.button_findxy:
                 String placexy = xy.getText().toString();
@@ -156,6 +188,34 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 int x1 = Integer.parseInt(temp[0].trim());
                 int y1 = Integer.parseInt(temp[1].trim());
                 bottomView.setpoint(x1, y1);
+                break;
+            case R.id.button_f1:
+                bottomView.setDrawable(getResources().getDrawable(R.drawable.f1));
+                f1.setBackgroundColor(0xFFFFFFFF);
+                f1.setTextColor(0xFF66CCFF);
+                f2.setBackgroundColor(0xFF66CCFF);
+                f2.setTextColor(0xFFFFFFFF);
+                bottomView.drawPathL1(tempArray1, x);
+                floor1 = 1;
+                if(floor == 1){
+                    bottomView.viewPoint();
+                }else{
+                    bottomView.hidePoint();
+                }
+                break;
+            case R.id.button_f2:
+                bottomView.setDrawable(getResources().getDrawable(R.drawable.f2));
+                f2.setBackgroundColor(0xFFFFFFFF);
+                f2.setTextColor(0xFF66CCFF);
+                f1.setBackgroundColor(0xFF66CCFF);
+                f1.setTextColor(0xFFFFFFFF);
+                bottomView.drawPathL2(tempArray2, x);
+                floor1 = 2;
+                if(floor == 2){
+                    bottomView.viewPoint();
+                }else{
+                    bottomView.hidePoint();
+                }
                 break;
         }
     }
@@ -177,7 +237,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 int mark = -1;
                 double min = 999999;
                 PlaceArray s = new PlaceArray();
-                Place [] tem = s.getPlaceArray();
+                Place [] tem = this.x;
                 for(int i=0;i<tem.length;i++){
                     double tempX = tem[i].getX();
                     double tempY = tem[i].getY();
@@ -188,6 +248,14 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                     }
                 }
                 start = mark;
+                if(tem[start].getFloor() == 1){
+                    floor = 1;
+                }else if(tem[start].getFloor() == 2){
+                    floor = 2;
+                }
+                if(floor1 == floor){
+                    bottomView.viewPoint();
+                }
                 bottomView.setpoint(tem[mark].getX(), tem[mark].getY());
                 /* define later */
 

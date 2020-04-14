@@ -31,6 +31,7 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
     int height;
     Drawable drawable;
     int x1,y1,x2,y2;
+    int hide = 0;
     ArrayList <Integer> pathInfo = null;
     Place [] p = null;
     Point point = new Point();
@@ -78,8 +79,9 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         canvas.translate(dx, dy);
 
         canvas.drawBitmap(bitmap, 0, 250, new Paint());
-        canvas.drawCircle(currentX, currentY, 10, paint);
-        if(p == null || pathInfo == null){}else {
+        if(hide == 1){ canvas.drawCircle(currentX, currentY, 10, paint);}
+
+        if(p == null || pathInfo == null || pathInfo.size() == 0){}else {
             for (int i = 0; i < pathInfo.size() - 1; i++) {
                 canvas.drawLine(p[pathInfo.get(i)].getX(), p[pathInfo.get(i)].getY(), p[pathInfo.get(i + 1)].getX(), p[pathInfo.get(i + 1)].getY(), paint);
             }
@@ -87,12 +89,15 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         canvas.restore();
     }
     protected void setpoint(int x, int y) {
-
-
         currentX = x;
         currentY = y;
-
         invalidate();
+    }
+    protected void hidePoint(){
+        hide = 0;
+    }
+    protected void viewPoint(){
+        hide = 1;
     }
 
     protected void setDrawable(Drawable x){
@@ -100,7 +105,12 @@ public class MapView extends View implements View.OnTouchListener, GestureDetect
         invalidate();
     }
 
-    protected void drawPath(ArrayList<Integer> x, Place [] y){
+    protected void drawPathL1(ArrayList<Integer> x, Place [] y){
+        this.pathInfo = x;
+        this.p = y;
+        invalidate();
+    }
+    protected void drawPathL2(ArrayList<Integer> x, Place [] y){
         this.pathInfo = x;
         this.p = y;
         invalidate();

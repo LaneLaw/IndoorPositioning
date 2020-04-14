@@ -4,6 +4,30 @@
     android:layout_height="match_parent"
     >
 
+    <Button
+        android:id="@+id/button_f1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="215dp"
+        android:background="#FFFFFF"
+        android:text="F1"
+        android:textColor="#66CCFF"
+        />
+
+    <Button
+        android:id="@+id/button_f2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="257dp"
+        android:background="#66CCFF"
+        android:text="F2"
+        android:textColor="#FFFFFF"/>
 
     <Button
         android:id="@+id/button_position"
